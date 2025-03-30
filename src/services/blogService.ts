@@ -144,8 +144,28 @@ export const blogService = {
     return topLevelComments;
   },
 
+  // Get all categories
+  getCategories: async (): Promise<CategoryDetailType[]> => {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('*');
+
+    if (error) {
+      console.error('Error fetching categories:', error);
+      return [];
+    }
+
+    return data.map((category) => ({
+      type: category.type as CategoryType,
+      label: category.label,
+      description: category.description,
+      color: category.color,
+      image: category.image
+    }));
+  },
+
   // Get category details
-  getCategoryDetail: async (category: CategoryType): Promise<CategoryDetailType | null> => {
+  getCategoryDetail: async (category: string): Promise<CategoryDetailType | null> => {
     const { data, error } = await supabase
       .from('categories')
       .select('*')
@@ -164,6 +184,23 @@ export const blogService = {
       color: data.color,
       image: data.image
     };
+  },
+
+  // Search posts
+  searchPosts: async (query: string): Promise<PostType[]> => {
+    const searchTerm = `%${query.toLowerCase()}%`;
+    
+    const { data, error } = await supabase
+      .from('posts')
+      .select('*')
+      .or(`title.ilike.${searchTerm},content.ilike.${searchTerm},excerpt.ilike.${searchTerm}`);
+
+    if (error) {
+      console.error('Error searching posts:', error);
+      return [];
+    }
+
+    return data.map(mapPostFromSupabase);
   },
 
   // Add a new comment
