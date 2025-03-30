@@ -9,7 +9,141 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      categories: {
+        Row: {
+          color: string
+          description: string
+          image: string
+          label: string
+          type: string
+        }
+        Insert: {
+          color: string
+          description: string
+          image: string
+          label: string
+          type: string
+        }
+        Update: {
+          color?: string
+          description?: string
+          image?: string
+          label?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      comments: {
+        Row: {
+          avatar: string | null
+          content: string
+          created_at: string
+          date: string
+          id: string
+          likes: number | null
+          parent_id: string | null
+          post_id: string
+          updated_at: string
+          username: string
+        }
+        Insert: {
+          avatar?: string | null
+          content: string
+          created_at?: string
+          date?: string
+          id?: string
+          likes?: number | null
+          parent_id?: string | null
+          post_id: string
+          updated_at?: string
+          username: string
+        }
+        Update: {
+          avatar?: string | null
+          content?: string
+          created_at?: string
+          date?: string
+          id?: string
+          likes?: number | null
+          parent_id?: string | null
+          post_id?: string
+          updated_at?: string
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "comments_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "comments"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      posts: {
+        Row: {
+          author: string
+          author_image: string | null
+          category: string
+          comments: number | null
+          content: string
+          cover_image: string
+          created_at: string
+          date: string
+          excerpt: string
+          featured: boolean | null
+          id: string
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+          views: number | null
+        }
+        Insert: {
+          author: string
+          author_image?: string | null
+          category: string
+          comments?: number | null
+          content: string
+          cover_image: string
+          created_at?: string
+          date?: string
+          excerpt: string
+          featured?: boolean | null
+          id?: string
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          views?: number | null
+        }
+        Update: {
+          author?: string
+          author_image?: string | null
+          category?: string
+          comments?: number | null
+          content?: string
+          cover_image?: string
+          created_at?: string
+          date?: string
+          excerpt?: string
+          featured?: boolean | null
+          id?: string
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          views?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
