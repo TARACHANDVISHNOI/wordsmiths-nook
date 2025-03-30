@@ -150,7 +150,7 @@ const teamMembers = [
 import { 
   BookOpen, 
   Users, 
-  GlobePlus, 
+  Globe, // Changed from GlobePlus to Globe
   PenTool
 } from 'lucide-react';
 
@@ -168,7 +168,7 @@ const values = [
   {
     title: 'Global Perspective',
     description: 'We celebrate diverse viewpoints and seek to provide insights from around the world.',
-    icon: GlobePlus,
+    icon: Globe, // Changed from GlobePlus to Globe
   },
   {
     title: 'Creative Freedom',
