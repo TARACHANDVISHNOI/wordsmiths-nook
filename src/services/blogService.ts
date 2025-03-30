@@ -59,7 +59,7 @@ export const blogService = {
   },
 
   // Get posts by category
-  getPostsByCategory: async (category: CategoryType): Promise<PostType[]> => {
+  getPostsByCategory: async (category: string): Promise<PostType[]> => {
     const { data, error } = await supabase
       .from('posts')
       .select('*')
