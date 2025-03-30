@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { PostType, CommentType, CategoryDetailType, CategoryType } from '@/types/blog';
 
